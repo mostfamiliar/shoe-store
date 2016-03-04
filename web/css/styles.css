@@ -6,3 +6,15 @@ ul {
     list-style-type: none;
     padding-left:0;
 }
+
+h1 a{
+    color: #ff0080;
+}
+
+a {
+    color: #00bfff;
+}
+
+.btn-danger {
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#4000ff),to(#c12e2a))
+}

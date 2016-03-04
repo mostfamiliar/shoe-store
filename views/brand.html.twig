@@ -29,17 +29,27 @@
             {% endif %}
         </div>
 
-    <!-- <div class="col-md-4">
+    <div class="col-md-4">
 
 
     <h2>Add Store</h2>
     <form action="/brand/{{brand.getId}}/add_store" method="post">
         <div class="form-group">
         <label name ="enter_store">Enter a store</label>
-        <input type="text" name="name" required>
+        <select name="id">
+            {% if all_stores is not empty %}
+                {% for store in all_stores %}
+            <option value="{{store.getId}}">{{ store.getName }}</option>
+            {% endfor %}
+            {% endif %}
+        </select>
         </div>
         <button type="submit" class="btn btn-info">Add store</button>
-        </div> -->
+    </form>
+        {% if error is not empty %}
+        <i>{{ error }}!</i>
+        {% endif %}
+        </div>
         </div>
     </div>
     </body>

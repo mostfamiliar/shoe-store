@@ -55,6 +55,23 @@
         return $app['twig']->render('store.html.twig', array('store' => $store, 'brands' => $brands, 'error' => $error));
     });
 
+    $app->post("brand/{id}/add_store", function($id) use ($app){
+        $brand = Brand::find($id);
+        $error = "";
+        $store_id = (int) $_POST['id'];
+        $store = Store::find($store_id);
+        if (in_array($store, $brand->getStores())){
+            $error = "This brand already exists";
+        }
+        else {
+        $brand->addStore($store);
+        }
+
+        $stores = $brand->getStores();
+        $all_stores = Store::getAll();
+        return $app['twig']->render('brand.html.twig', array('brand' => $brand, 'stores' => $stores, 'all_stores' => $all_stores, 'error' => $error));
+    });
+
     $app->post("/delete_all", function() use ($app){
      Store::deleteAll();
      return $app['twig']->render('index.html.twig', array('stores' => Store::getAll()));
@@ -80,7 +97,8 @@
     $app->get("/brand/{id}", function($id) use ($app) {
         $brand = Brand::Find($id);
         $stores = $brand->getStores();
-        return $app['twig']->render('brand.html.twig', array('brand' => $brand, 'stores' => $stores));
+        $all_stores = Store::getAll();
+        return $app['twig']->render('brand.html.twig', array('brand' => $brand, 'stores' => $stores, 'all_stores' => $all_stores));
     });
 
     $app->patch("/store/{id}", function ($id) use ($app){
