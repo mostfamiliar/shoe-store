@@ -169,7 +169,7 @@ class StoreTest extends PHPUnit_Framework_TestCase{
        $id = 1;
        $name = "Vans";
        $test_brand = new Brand($id, $name);
-       $test_brand->save();
+       $test_brand->save($name);
 
        //Act
        $test_store->addBrand($test_brand);

@@ -35,23 +35,37 @@
         $id = null;
         $new_brand = new Brand($id, $brand_name);
         $found_brand = $new_brand->save($brand_name);
-        var_dump($found_brand);
+        $error = "";
+        // var_dump($found_brand);
+        // var_dump($store->getBrands());
+        // var_dump(in_array($found_brand, $store->getBrands()));
 
         if ($found_brand != null) {
+            if (in_array($found_brand, $store->getBrands())){
+                $error = "This brand already exists";
+            }
+            else {
             $store->addBrand($found_brand);
+            }
         }
         else {
             $store->addBrand($new_brand);
         }
 
         $brands = $store->getBrands();
-
-        return $app['twig']->render('store.html.twig', array('store' => $store, 'brands' => $brands));
+        return $app['twig']->render('store.html.twig', array('store' => $store, 'brands' => $brands, 'error' => $error));
     });
 
     $app->post("/delete_all", function() use ($app){
-        Store::deleteAll();
+     Store::deleteAll();
      return $app['twig']->render('index.html.twig', array('stores' => Store::getAll()));
+    });
+
+    $app->post("/store/{id}/delete_brands", function($id) use ($app){
+     Brand::deleteAll();
+     $store = Store::Find($id);
+     $brands = $store->getBrands();
+     return $app['twig']->render('store.html.twig', array('store' => $store, 'brands' => $brands));
     });
 
     $app->get("/store/{id}", function($id) use ($app){

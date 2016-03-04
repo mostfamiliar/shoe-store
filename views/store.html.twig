@@ -28,7 +28,7 @@
             <p>No brands added yet!</p>
             {% endif %}
 
-            <form action="/delete_all_brands" method="post">
+            <form action="/store/{{store.getId}}/delete_brands" method="post">
                 <button type="submit" class="btn btn-danger">Delete All</button>
             </form>
         </div>
@@ -41,6 +41,10 @@
                 </div>
                 <button type="submit" class="btn btn-info">Submit</button>
             </form>
+
+            {% if error is not empty %}
+            {{ error }}
+            {% endif %}
 
 
         </div>

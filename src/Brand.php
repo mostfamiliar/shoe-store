@@ -27,15 +27,19 @@
 
         function save($new_name)
         {
+
             $query = $GLOBALS['DB']->query("SELECT * FROM brands WHERE name = '{$new_name}';");
             $brand_match = $query->fetchAll(PDO::FETCH_ASSOC);
+
             $found_brand = null;
             foreach ($brand_match as $brand) {
-                $name = $brand['name'];
                 $id = $brand['id'];
+                var_dump($id);
+                $name = $brand['name'];
                 $found_brand = Brand::find($id);
+                var_dump($found_brand);
             }
-            if ($found_brand != null) {
+            if ($found_brand != null && ($name == $new_name)) {
                 return $found_brand;
             }
             else {
@@ -74,7 +78,7 @@
             foreach($brands as $brand)
             {
                 $brand_id = $brand->getId();
-                if ($brand_id = $search_id)
+                if ($brand_id == $search_id)
                 {
                     $found_brand = $brand;
                 }
