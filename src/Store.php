@@ -26,7 +26,7 @@ class Store {
 
       function save()
       {
-          $GLOBALS['DB']->exec("INSERT INTO stores (name) VALUES ('{$this->getName()}';)");
+          $GLOBALS['DB']->exec("INSERT INTO stores (name) VALUES ('{$this->getName()}');");
           $this->id = $GLOBALS['DB']->lastInsertId();
       }
 
@@ -37,7 +37,7 @@ class Store {
         foreach ($returned_stores as $store)
         {
             $id = $store['id'];
-            $name = $store['store_name'];
+            $name = $store['name'];
             $new_store = new Store($id, $name);
             array_push($stores, $new_store);
         }
