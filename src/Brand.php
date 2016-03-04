@@ -25,10 +25,25 @@
             return $this->name;
         }
 
-        function save()
+        function save($new_name)
         {
-            $GLOBALS['DB']->exec("INSERT INTO brands (name) VALUES ('{$this->getName()}');");
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $query = $GLOBALS['DB']->query("SELECT * FROM brands WHERE name = '{$new_name}';");
+            $brand_match = $query->fetchAll(PDO::FETCH_ASSOC);
+            $found_brand = null;
+            foreach ($brand_match as $brand) {
+                $name = $brand['name'];
+                $id = $brand['id'];
+                $found_brand = Brand::find($id);
+            }
+            if ($found_brand != null) {
+                var_dump($found_brand);
+                return $found_brand;
+            }
+            else {
+                $GLOBALS['DB']->exec("INSERT INTO brands (name) VALUES ('{$this->getName()}');");
+                $this->id = $GLOBALS['DB']->lastInsertId();
+            }
+
         }
 
         static function getAll()

@@ -57,13 +57,24 @@ class BrandTest extends PHPUnit_Framework_TestCase{
         $id = 1;
         $name = "Nike";
         $test_brand = new Brand($id, $name);
-        $test_brand->save();
+        $test_brand->save($name);
+
+        $id2 = 2;
+        $name2 = "Reebok";
+        $test_brand2 = new Brand($id, $name2);
+        $test_brand2->save($name2);
+
+        $id3 = 3;
+        $name3 = "Nike";
+        $test_brand3 = new Brand($id3, $name3);
+        $test_brand3->save($name3);
+
 
         //Act
         $result = Brand::getAll();
 
         //Assert
-        $this->assertEquals($test_brand, $result[0]);
+        $this->assertEquals([$test_brand, $test_brand2] , $result);
 
    }
 
@@ -73,12 +84,12 @@ class BrandTest extends PHPUnit_Framework_TestCase{
        $id = 1;
        $name = "Vans";
        $test_brand = new Brand($id, $name);
-       $test_brand->save();
+       $test_brand->save($name);
 
        $id = 2;
        $name2 = "Emerica";
        $test_brand2 = new Brand($id, $name2);
-       $test_brand2->save();
+       $test_brand2->save($name2);
 
        //Act
        $result = Brand::getAll();
@@ -92,7 +103,7 @@ class BrandTest extends PHPUnit_Framework_TestCase{
        $id = 1;
        $name = "Nike";
        $test_brand = new Brand($id, $name);
-       $test_brand->save();
+       $test_brand->save($name);
 
        //Act
        $result = Brand::find($test_brand->getId());
@@ -106,7 +117,7 @@ class BrandTest extends PHPUnit_Framework_TestCase{
        $id = 1;
        $name = "Nike";
        $test_brand = new Brand($id, $name);
-       $test_brand->save();
+       $test_brand->save($name);
        $new_name = "Reebok";
 
        //Act
@@ -124,12 +135,12 @@ class BrandTest extends PHPUnit_Framework_TestCase{
        $id = 1;
        $name = "Vans";
        $test_brand = new Brand($id, $name);
-       $test_brand->save();
+       $test_brand->save($name);
 
        $id = 2;
        $name2 = "Emerica";
        $test_brand2 = new Brand($id, $name2);
-       $test_brand2->save();
+       $test_brand2->save($name2);
 
        //Act
        $test_brand->delete();
@@ -145,7 +156,7 @@ class BrandTest extends PHPUnit_Framework_TestCase{
        $id = 1;
        $name = "Vans";
        $test_brand = new Brand($id, $name);
-       $test_brand->save();
+       $test_brand->save($name);
 
        $id = 1;
        $name = "Footlocker";
@@ -166,7 +177,7 @@ class BrandTest extends PHPUnit_Framework_TestCase{
        $id = 1;
        $name = "Vans";
        $test_brand = new Brand($id, $name);
-       $test_brand->save();
+       $test_brand->save($name);
 
        $id = 1;
        $name = "Footlocker";
