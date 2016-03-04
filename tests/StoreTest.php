@@ -7,6 +7,7 @@
 */
 
 require_once "src/Store.php";
+require_once "src/Brand.php";
 
 //if using database
 $server = 'mysql:host=localhost;dbname=shoes_test';

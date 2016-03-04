@@ -5,9 +5,21 @@
         <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
         <link rel="stylesheet" href="/css/styles.css" type="text/css">
         <meta charset="utf-8">
-        <title>Shoes</title>
+        <title>Shoe Store Finder</title>
     </head>
     <body>
+        <h1>Shoe Store Finder</h1>
+
+        <h2>Existing Stores</h2>
+            {% if stores is not empty %}
+                {% for store in stores %}
+            <ul>
+                <li> {{ store.getName }} </li>
+            </ul>
+                {% endfor %}
+            {% else %}
+            <p>No stores added yet!</p>
+            {% endif %}
 
     </body>
 </html>
