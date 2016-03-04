@@ -21,6 +21,7 @@
     });
 
     $app->post("/add_store", function() use ($app){
+        //add strip apostrophe in
         $store_name = $_POST['name'];
         $id = null;
         $new_store = new Store($id, $store_name);
@@ -57,6 +58,13 @@
     $app->get("/store/{id}/edit", function($id) use ($app){
         $store = Store::Find($id);
         return $app['twig']->render('edit_store.html.twig', array('store' => $store));
+    });
+
+    $app->get("/brand/{id}", function($id) use ($app) {
+        $brand = Brand::Find($id);
+        var_dump($brand->getName());
+        $stores = $brand->getStores();
+        return $app['twig']->render('brand.html.twig', array('brand' => $brand, 'stores' => $stores));
     });
 
     $app->patch("/store/{id}", function ($id) use ($app){
