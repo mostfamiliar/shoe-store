@@ -43,6 +43,18 @@
                 </form>
 
 
+                {% if brands is not empty %}
+                <h2>Current Brands</h2>
+                    {% for brand in brands %}
+                <ul>
+                    <li><a href="/brand/{{ brand.getId }}"><h4>{{ brand.getName }}</h4></a></li>
+                </ul>
+                    {% endfor %}
+                <form action="/delete_brands" method="post">
+                    <button type="submit" class="btn btn-danger">Delete All</button>
+                </form>
+                {% endif %}
+
             </div>
             </div>
 
