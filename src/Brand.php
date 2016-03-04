@@ -36,7 +36,6 @@
                 $found_brand = Brand::find($id);
             }
             if ($found_brand != null) {
-                var_dump($found_brand);
                 return $found_brand;
             }
             else {

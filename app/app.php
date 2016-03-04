@@ -35,13 +35,15 @@
         $id = null;
         $new_brand = new Brand($id, $brand_name);
         $found_brand = $new_brand->save($brand_name);
+        var_dump($found_brand);
 
-        if ($new_brand != null) {
+        if ($found_brand != null) {
             $store->addBrand($found_brand);
         }
         else {
             $store->addBrand($new_brand);
         }
+
         $brands = $store->getBrands();
 
         return $app['twig']->render('store.html.twig', array('store' => $store, 'brands' => $brands));
