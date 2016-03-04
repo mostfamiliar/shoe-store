@@ -66,6 +66,26 @@ class Store {
          $this->setName($new_name);
      }
 
+     function addBrand($brand)
+     {
+         $GLOBALS['DB']->exec("INSERT INTO brands_stores (store_id, brand_id) VALUES ({$this->getId()}, {$brand->getId()});");
+     }
+
+     function getBrands()
+     {
+         $returned_brands = $GLOBALS['DB']->query("SELECT brands.* FROM stores JOIN brands_stores ON (brands_stores.store_id = stores.id) JOIN brands ON (brands.id = brands_stores.brand_id) WHERE stores.id = {$this->getId()};");
+
+         $brands = array();
+         foreach($returned_brands as $brand)
+         {
+             $id = $brand['id'];
+             $name = $brand['name'];
+             $new_brand = new Brand($id, $name);
+             array_push($brands, $new_brand);
+         }
+         return $brands;
+     }
+
      function delete()
      {
          $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()}");
