@@ -18,10 +18,10 @@ $DB = new PDO($server, $username, $password);
 
 class BrandTest extends PHPUnit_Framework_TestCase{
 
-    // protected function tearDown()
-    // {
-    //    Brand::deleteAll();
-    // }
+    protected function tearDown()
+    {
+       Brand::deleteAll();
+    }
 
     function testGetName()
     {
@@ -47,6 +47,40 @@ class BrandTest extends PHPUnit_Framework_TestCase{
         $result = $test_id->getId();
         //Assert
         $this->assertEquals($id, $result);
+   }
+
+   function testSave()
+   {
+        //Arrange
+        $id = 1;
+        $name = "Nike";
+        $test_brand = new Brand($id, $name);
+        $test_brand->save();
+        //Act
+        $result = Brand::getAll();
+        //Assert
+        $this->assertEquals($test_brand, $result[0]);
+
+   }
+
+   function testGetAll()
+   {
+       //Arrange
+       $id = 1;
+       $name = "Vans";
+       $test_brand = new Brand($id, $name);
+       $test_brand->save();
+
+       $id = 2;
+       $name2 = "Emerica";
+       $test_brand2 = new Brand($id, $name2);
+       $test_brand2->save();
+
+       //Act
+       $result = Brand::getAll();
+
+       //Assert
+       $this->assertEquals([$test_brand, $test_brand2], $result);
    }
 }
 
