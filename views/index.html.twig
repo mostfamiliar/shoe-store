@@ -7,29 +7,48 @@
         <title>Shoe Store Finder</title>
     </head>
     <body>
-        <h1><a href="/">Shoe Store Finder</a></h1>
+        <div class="container">
+          <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+              <h1><a href="/"><i>SHOE STORE FINDER</i></a></h1>
+                </div>
+         </div>
 
-        <h2>Existing Stores</h2>
-            {% if stores is not empty %}
-                {% for store in stores %}
-            <ul>
-                <li><a href="/store/{{ store.getId }}"><h4>{{ store.getName }}</h4></a><a href="/store/{{store.getId}}/edit"> Edit</a></li>
-            </ul>
-                {% endfor %}
-            {% else %}
-            <p>No stores added yet!</p>
-            {% endif %}
+            <div class="row">
+              <div class="col-md-4 col-md-offset-2">
+                  <h2>Stores</h2>
+                  {% if stores is not empty %}
+                      {% for store in stores %}
+                  <ul>
+                      <li><a href="/store/{{ store.getId }}"><h4>{{ store.getName }}</h4></a><a href="/store/{{store.getId}}/edit"> Edit</a></li>
+                  </ul>
+                      {% endfor %}
+                  {% else %}
+                  <p>No stores added yet!</p>
+                  {% endif %}
 
-        <form action="/add_store" method="post">
-            <div class="form-group">
-            <label name ="enter_store">Enter a store</label>
-            <input type="text" name="name" required>
+                  <form action="/delete_all" method="post">
+                      <button type="submit" class="btn btn-danger">Delete All</button>
+                  </form>
+
             </div>
-            <button type="submit" class="btn btn-info">Add store</button>
-        </form>
+            <div class="col-md-4">
+                <h2>Add Store</h2>
+                <form action="/add_store" method="post">
+                    <div class="form-group">
+                    <label name ="enter_store">Enter a store</label>
+                    <input type="text" name="name" required>
+                    </div>
+                    <button type="submit" class="btn btn-info">Add store</button>
+                </form>
 
-        <form action="/delete_all" method="post">
-            <button type="submit" class="btn btn-danger">Delete All</button>
-        </form>
+
+            </div>
+            </div>
+
+
+        </div>
+
+
     </body>
 </html>
