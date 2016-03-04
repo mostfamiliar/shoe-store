@@ -7,13 +7,13 @@
         <title>Shoe Store Finder</title>
     </head>
     <body>
-        <h1>Shoe Store Finder</h1>
+        <h1><a href="/">Shoe Store Finder</a></h1>
 
         <h2>Existing Stores</h2>
             {% if stores is not empty %}
                 {% for store in stores %}
             <ul>
-                <li> {{ store.getName }} </li>
+                <li><a href="/store/{{ store.getId }}"><h4>{{ store.getName }}</h4></a><a href="/store/{{store.getId}}/edit"> Edit</a></li>
             </ul>
                 {% endfor %}
             {% else %}

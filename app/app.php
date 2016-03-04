@@ -3,8 +3,8 @@
     require_once __DIR__."/../src/Store.php";
     require_once __DIR__."/../src/Brand.php";
 
-
-    // session_start();
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
 
     $app = new Silex\Application();
 
@@ -31,6 +31,29 @@
     $app->post("/delete_all", function() use ($app){
         Store::deleteAll();
      return $app['twig']->render('index.html.twig', array('stores' => Store::getAll()));
+    });
+
+    // $app->get("/store/{id}/edit", function($id) use ($app){
+    //     $store = Store::Find($id);
+    //     return $app['twig']->render('edit_store.html.twig', array('store' => $store));
+    // });
+
+    $app->get("/store/{id}/edit", function($id) use ($app){
+        $store = Store::Find($id);
+        return $app['twig']->render('edit_store.html.twig', array('store' => $store));
+    });
+
+    $app->patch("/store/{id}", function ($id) use ($app){
+        $new_name = $_POST['new_name'];
+        $store = Store::find($id);
+        $store->update($new_name);
+        return $app['twig']->render('index.html.twig', array('stores' => Store::getAll()));
+    });
+
+    $app->delete("/store/{id}", function ($id) use ($app){
+        $store = Store::find($id);
+        $store->delete();
+        return $app['twig']->render('index.html.twig', array('stores' => Store::getAll()));
     });
 
     return $app;

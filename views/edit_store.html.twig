@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/styles.css" type="text/css">
+        <meta charset="utf-8">
+        <title>Shoe Store Finder</title>
+    </head>
+    <body>
+        <h1><a href="/">Shoe Store - Edit Store</a></h1>
+
+        <h2><i>{{ store.getName }}</i></h2>
+        <form action="/store/{{store.getId}}" method="post">
+            <input id="store_name" name="_method" type="hidden" value="patch">
+            <div class="form-group">
+            <label name ="enter_store">Change store name</label>
+            <input type="text" name="new_name" required>
+            </div>
+            <button type="submit" class="btn btn-info">Add store</button>
+        </form>
+
+        <form action="/store/{{store.getId}}" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit" class="btn btn-danger">Delete store</button>
+        </form>
+    </body>
+</html>
