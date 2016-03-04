@@ -51,6 +51,29 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM brands");
         }
+
+        static function find($search_id)
+        {
+            $found_brand = "";
+            $brands = Brand::getAll();
+
+            foreach($brands as $brand)
+            {
+                $brand_id = $brand->getId();
+                if ($brand_id = $search_id)
+                {
+                    $found_brand = $brand;
+                }
+            }
+
+            return $found_brand;
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE brands SET name '{$new_name}' WHERE id = {$this->getId()}");
+            $this->setName($new_name);
+        }
     }
 
 
