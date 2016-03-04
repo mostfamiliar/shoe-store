@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/styles.css" type="text/css">
+        <meta charset="utf-8">
+        <title>Shoe Store Finder</title>
+    </head>
+    <body>
+        <h1><a href="/">Shoe Store</a></h1>
+
+        <h2><i>{{ store.getName }}</i></h2>
+        <h2>Brands:</h2>
+            {% if brands is not empty %}
+                {% for brand in brands %}
+            <ul>
+                <li><a href="/brand/{{ brand.getId }}"><h4>{{ brand.getName }}</h4></a><a href="/brand/{{brand.getId}}/edit"> Edit</a></li>
+            </ul>
+                {% endfor %}
+            {% else %}
+            <p>No brands added yet!</p>
+            {% endif %}
+
+            <form action="/store/{{store.getId}}/add_brand" method="post">
+                <div class="form-group">
+                <label name ="enter_store">Add a brand to this store</label>
+                <input type="text" name="name" required>
+                </div>
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+
+            <form action="/delete_all_brands" method="post">
+                <button type="submit" class="btn btn-danger">Delete All</button>
+            </form>
+    </body>
+</html>
