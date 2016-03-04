@@ -1,6 +1,6 @@
 # _SHOE STORE FINDER_
 
-#### _App of shoe stores and brands, 2/26/2015_
+#### _App of shoe stores and brands, 3/04/2015_
 
 #### By _**Torrence Stratton**_
 
