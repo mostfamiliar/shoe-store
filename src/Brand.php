@@ -34,10 +34,8 @@
             $found_brand = null;
             foreach ($brand_match as $brand) {
                 $id = $brand['id'];
-                var_dump($id);
                 $name = $brand['name'];
                 $found_brand = Brand::find($id);
-                var_dump($found_brand);
             }
             if ($found_brand != null && ($name == $new_name)) {
                 return $found_brand;

@@ -21,7 +21,7 @@
             {% if brands is not empty %}
                 {% for brand in brands %}
             <ul>
-                <li><a href="/brand/{{ brand.getId }}"><h4>{{ brand.getName }}</h4></a><a href="/brand/{{brand.getId}}/edit"> Edit</a></li>
+                <li><a href="/brand/{{ brand.getId }}"><h4>{{ brand.getName }}</h4></a></li>
             </ul>
                 {% endfor %}
             {% else %}
@@ -40,7 +40,7 @@
             </form>
 
             {% if error is not empty %}
-            {{ error }}
+            <i>{{ error }}!</i>
             {% endif %}
 
 

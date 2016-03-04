@@ -21,8 +21,9 @@
     });
 
     $app->post("/add_store", function() use ($app){
-        //add strip apostrophe in
-        $store_name = $_POST['name'];
+        $name = $_POST['name'];
+        $formatted_name = preg_replace('/[ ](?=[ ])|[^-_,A-Za-z0-9 ]+/', '', $name);
+        $store_name = ucfirst($formatted_name);
         $id = null;
         $new_store = new Store($id, $store_name);
         $new_store->save();
@@ -31,15 +32,13 @@
 
     $app->post("store/{id}/add_brand", function($id) use ($app){
         $store = Store::find($id);
-        $brand_name = $_POST['name'];
+        $name = $_POST['name'];
+        $formatted_name = preg_replace('/[ ](?=[ ])|[^-_,A-Za-z0-9 ]+/', '', $name);
+        $brand_name = ucfirst($formatted_name);
         $id = null;
         $new_brand = new Brand($id, $brand_name);
         $found_brand = $new_brand->save($brand_name);
         $error = "";
-        // var_dump($found_brand);
-        // var_dump($store->getBrands());
-        // var_dump(in_array($found_brand, $store->getBrands()));
-
         if ($found_brand != null) {
             if (in_array($found_brand, $store->getBrands())){
                 $error = "This brand already exists";
@@ -80,9 +79,7 @@
 
     $app->get("/brand/{id}", function($id) use ($app) {
         $brand = Brand::Find($id);
-        var_dump($brand);
         $stores = $brand->getStores();
-        var_dump($stores);
         return $app['twig']->render('brand.html.twig', array('brand' => $brand, 'stores' => $stores));
     });
 
@@ -90,7 +87,7 @@
         $new_name = $_POST['new_name'];
         $store = Store::find($id);
         $store->update($new_name);
-        return $app['twig']->render('index.html.twig', array('stores' => Store::getAll()));
+        return $app['twig']->render('index.html.twig', array('stores' => Store::getAll(), 'brands' => Brand::getAll()));
     });
 
     $app->delete("/store/{id}", function ($id) use ($app){

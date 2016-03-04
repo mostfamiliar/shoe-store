@@ -21,26 +21,25 @@
             {% if stores is not empty %}
                 {% for store in stores %}
             <ul>
-                <li><a href="/store/{{ store.getId }}"><h4>{{ store.getName }}</h4></a><a href="/store/{{store.getId}}/edit"> Edit</a></li>
+                <li><a href="/store/{{ store.getId }}"><h4>{{ store.getName }}</h4></a></li>
             </ul>
                 {% endfor %}
             {% else %}
             <p>No stores added yet!</p>
             {% endif %}
         </div>
-    </div>
 
-            <!-- <form action="/store/{{store.getId}}/add_brand" method="post">
-                <div class="form-group">
-                <label name ="enter_store">Add a brand to this store</label>
-                <input type="text" name="name" required>
-                </div>
-                <button type="submit" class="btn btn-info">Submit</button>
-            </form> -->
+    <!-- <div class="col-md-4">
 
-            <!-- <form action="/delete_all_brands" method="post">
-                <button type="submit" class="btn btn-danger">Delete All</button>
-            </form> -->
+
+    <h2>Add Store</h2>
+    <form action="/brand/{{brand.getId}}/add_store" method="post">
+        <div class="form-group">
+        <label name ="enter_store">Enter a store</label>
+        <input type="text" name="name" required>
+        </div>
+        <button type="submit" class="btn btn-info">Add store</button>
+        </div> -->
         </div>
     </div>
     </body>
